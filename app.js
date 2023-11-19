@@ -25,6 +25,13 @@ const initializeDbAndServer = async()=>{
 }
 initializeDbAndServer();
 
+//homepage 
+
+app.get("/",(request,response)=>{
+    response.send("Twitter Clone");
+}
+);
+
 //regiser new user
 // api 1
 app.post("/register/",async(request,response)=>{
