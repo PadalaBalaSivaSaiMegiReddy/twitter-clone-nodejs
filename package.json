@@ -5,7 +5,8 @@
   "main": "app.js",
   "author": "Megi",
   "license": "MIT",
-  "dependencies": { 
+  "dependencies": {
+    "bcrypt": "^5.1.1"
   },
   "rough": {
     "bcrypt": "5.0.1",
