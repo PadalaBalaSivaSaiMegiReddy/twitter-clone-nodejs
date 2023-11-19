@@ -50,5 +50,4 @@ app.post("/register/",async(request,response)=>{
             response.send("User created successfully");
         }
     }
-
 });
