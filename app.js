@@ -138,3 +138,23 @@ app.get("/user/tweets/feed/", authenticationToken, async (request, response) => 
 	response.send(responseResult);
 });
 
+//api 4 
+
+app.get("/user/following/", authenticationToken, async (request, response) => {
+	let { username } = request;
+	const getUserIdQuery = `select user_id from user where username='${username}';`;
+	const getUserId = await database.get(getUserIdQuery);
+	// console.log(getUserId);
+	const getFollowerIdsQuery = `select following_user_id from follower 
+	where follower_user_id=${getUserId.user_id};`;
+	const getFollowerIdsArray = await database.all(getFollowerIdsQuery);
+	// console.log(getFollowerIdsArray);
+	const getFollowerIds = getFollowerIdsArray.map((eachUser) => {
+		return eachUser.following_user_id;
+	});
+	// console.log(`${getFollowerIds}`);
+	const getFollowersResultQuery = `select name from user where user_id in (${getFollowerIds});`;
+	const responseResult = await database.all(getFollowersResultQuery);
+	//console.log(responseResult);
+	response.send(responseResult);
+});
